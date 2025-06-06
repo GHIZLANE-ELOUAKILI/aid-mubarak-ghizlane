@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aïd Mubarak</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Playfair+Display:wght@400;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Amiri', serif;
+            background: linear-gradient(135deg, #0a192f 0%, #172a45 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+            color: #ffffff;
+        }
+        
+        /* Étoiles animées (plus subtiles) */
+        .stars {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+        
+        .star {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            animation: twinkle 3s infinite alternate;
+        }
+        
+        @keyframes twinkle {
+            0% { opacity: 0.2; transform: scale(1); }
+            100% { opacity: 0.8; transform: scale(1.1); }
+        }
+        
+        /* Croissant de lune plus sobre */
+        .moon {
+            position: fixed;
+            top: 5%;
+            right: 8%;
+            width: 100px;
+            height: 100px;
+            background: #f8f9fa;
+            border-radius: 50%;
+            box-shadow: 0 0 20px rgba(248, 249, 250, 0.3);
+            z-index: 2;
+        }
+        
+        .moon::before {
+            content: '';
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            width: 70px;
+            height: 70px;
+            background: #0a192f;
+            border-radius: 50%;
+        }
+        
+        /* Container principal */
+        .container {
+            position: relative;
+            z-index: 3;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 20px;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        /* Titre principal */
+        .main-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            font-weight: 700;
+            color: #e2b979;
+            margin-bottom: 20px;
+            animation: titleAppear 1.5s ease-out;
+            line-height: 1.2;
+        }
+        
+        @keyframes titleAppear {
+            0% { 
+                opacity: 0; 
+                transform: translateY(-30px); 
+            }
+            100% { 
+                opacity: 1; 
+                transform: translateY(0); 
+            }
+        }
+        
+        /* Nom personnalisé */
+        .name-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            font-weight: 400;
+            color: #f8f9fa;
+            margin-bottom: 30px;
+            letter-spacing: 1px;
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        .name-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #e2b979, transparent);
+        }
+        
+        /* Texte en arabe */
+        .arabic-text {
+            font-size: 2.5rem;
+            color: #ffffff;
+            margin-bottom: 30px;
+            animation: fadeInUp 1.5s ease-out 0.3s both;
+            direction: rtl;
+            font-weight: 700;
+        }
+        
+        /* Sous-titre */
+        .subtitle {
+            font-size: 1.3rem;
+            color: #c9d1d9;
+            margin-bottom: 40px;
+            animation: fadeInUp 1.5s ease-out 0.6s both;
+            line-height: 1.6;
+            max-width: 600px;
+        }
+        
+        @keyframes fadeInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Séparateur élégant */
+        .divider {
+            width: 150px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #e2b979, transparent);
+            margin: 30px auto;
+            animation: fadeInUp 1.5s ease-out 0.9s both;
+        }
+        
+        /* Bouton plus sobre */
+        .blessing-btn {
+            background: transparent;
+            border: 1px solid #e2b979;
+            padding: 12px 30px;
+            font-size: 1.1rem;
+            font-family: 'Amiri', serif;
+            color: #e2b979;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            animation: fadeInUp 1.5s ease-out 1.2s both;
+            margin-top: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .blessing-btn:hover {
+            background: rgba(226, 185, 121, 0.1);
+        }
+        
+        .blessing-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(226, 185, 121, 0.2), transparent);
+            transition: 0.5s;
+        }
+        
+        .blessing-btn:hover::before {
+            left: 100%;
+        }
+        
+        /* Message de bénédiction */
+        .blessing-message {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #0a192f;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            display: none;
+            z-index: 100;
+            text-align: center;
+            color: #f8f9fa;
+            max-width: 450px;
+            width: 90%;
+            border: 1px solid rgba(226, 185, 121, 0.3);
+        }
+        
+        .blessing-message.show {
+            display: block;
+            animation: blessingAppear 0.4s ease-out;
+        }
+        
+        @keyframes blessingAppear {
+            0% {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(0.9);
+            }
+            100% {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1);
+            }
+        }
+        
+        .blessing-message h3 {
+            color: #e2b979;
+            margin-bottom: 15px;
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .blessing-message p {
+            line-height: 1.6;
+        }
+        
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #c9d1d9;
+            transition: color 0.3s;
+        }
+        
+        .close-btn:hover {
+            color: #e2b979;
+        }
+        
+        /* Signature */
+        .signature {
+            margin-top: 40px;
+            font-style: italic;
+            color: #8b949e;
+            animation: fadeInUp 1.5s ease-out 1.5s both;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 2.8rem;
+            }
+            
+            .name-title {
+                font-size: 1.8rem;
+            }
+            
+            .arabic-text {
+                font-size: 2rem;
+            }
+            
+            .subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .moon {
+                width: 70px;
+                height: 70px;
+                top: 3%;
+                right: 5%;
+            }
+            
+            .moon::before {
+                width: 50px;
+                height: 50px;
+                top: 10px;
+                left: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Étoiles -->
+    <div class="stars" id="stars"></div>
+    
+    <!-- Croissant de lune -->
+    <div class="moon"></div>
+    
+    <!-- Container principal -->
+    <div class="container">
+        <h1 class="main-title">Aïd Mubarak</h1>
+        
+        <div class="name-title">Ghizlane Elouakili</div>
+        
+        <div class="arabic-text">عيد مبارك</div>
+        
+        <div class="divider"></div>
+        
+        <p class="subtitle">Que cette fête sacrée vous apporte paix, bonheur et prospérité. Puisse cette occasion être l'opportunité de renforcer les liens familiaux et spirituels.</p>
+        
+        <button class="blessing-btn" onclick="showBlessing()">
+            Recevoir une bénédiction
+        </button>
+        
+        <p class="signature">Meilleurs vœux pour un Aïd béni</p>
+    </div>
+    
+    <!-- Message de bénédiction -->
+    <div class="blessing-message" id="blessingMessage">
+        <button class="close-btn" onclick="hideBlessing()">×</button>
+        <h3>Bénédiction de l'Aïd</h3>
+        <p id="blessingText"></p>
+    </div>
+
+    <script>
+        // Créer les étoiles
+        function createStars() {
+            const starsContainer = document.getElementById('stars');
+            const numStars = 30; // Moins d'étoiles pour un look plus sobre
+            
+            for (let i = 0; i < numStars; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.width = Math.random() * 2 + 1 + 'px';
+                star.style.height = star.style.width;
+                star.style.animationDelay = Math.random() * 3 + 's';
+                starsContainer.appendChild(star);
+            }
+        }
+        
+        // Messages de bénédiction
+        const blessings = [
+            "Que le Tout Miséricordieux vous accorde santé, bonheur et prospérité en cette journée bénie.",
+            "Puisse cet Aïd apporter la paix dans votre cœur et la joie dans votre foyer.",
+            "Que les bénédictions de cette fête sacrée illuminent votre chemin toute l'année.",
+            "Qu'Allah accepte vos bonnes actions et vous comble de Ses bienfaits.",
+            "Que cette fête renforce les liens d'amour et de fraternité autour de vous.",
+            "Puisse cet Aïd marquer le début d'une période de réussite et d'épanouissement.",
+            "Que la lumière de cette fête vous apporte sérénité et accomplissement."
+        ];
+        
+        // Afficher une bénédiction aléatoire
+        function showBlessing() {
+            const message = document.getElementById('blessingMessage');
+            const text = document.getElementById('blessingText');
+            const randomBlessing = blessings[Math.floor(Math.random() * blessings.length)];
+            
+            text.textContent = randomBlessing;
+            message.classList.add('show');
+            
+            // Effet de vibration sur mobile
+            if (navigator.vibrate) {
+                navigator.vibrate(100);
+            }
+        }
+        
+        // Cacher le message de bénédiction
+        function hideBlessing() {
+            const message = document.getElementById('blessingMessage');
+            message.classList.remove('show');
+        }
+        
+        // Fermer le message en cliquant à l'extérieur
+        document.addEventListener('click', function(e) {
+            const message = document.getElementById('blessingMessage');
+            if (e.target === message) {
+                hideBlessing();
+            }
+        });
+        
+        // Fermer avec la touche Échap
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                hideBlessing();
+            }
+        });
+        
+        // Initialiser les animations
+        document.addEventListener('DOMContentLoaded', function() {
+            createStars();
+            
+            // Animation subtile du titre
+            const title = document.querySelector('.main-title');
+            title.style.opacity = 0;
+            setTimeout(() => {
+                title.style.transition = 'opacity 1.5s ease-out';
+                title.style.opacity = 1;
+            }, 300);
+        });
+    </script>
+</body>
+</html>
