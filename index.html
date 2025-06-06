@@ -15,14 +15,13 @@
         
         body {
             font-family: 'Amiri', serif;
-            background: linear-gradient(135deg, #0a192f 0%, #172a45 100%);
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #4a90e2 100%);
             min-height: 100vh;
             overflow-x: hidden;
             position: relative;
-            color: #ffffff;
         }
         
-        /* Étoiles animées (plus subtiles) */
+        /* Étoiles animées */
         .stars {
             position: fixed;
             width: 100%;
@@ -32,27 +31,28 @@
         
         .star {
             position: absolute;
-            background: rgba(255, 255, 255, 0.8);
+            background: #fff;
             border-radius: 50%;
-            animation: twinkle 3s infinite alternate;
+            animation: twinkle 2s infinite alternate;
         }
         
         @keyframes twinkle {
-            0% { opacity: 0.2; transform: scale(1); }
-            100% { opacity: 0.8; transform: scale(1.1); }
+            0% { opacity: 0.3; transform: scale(1); }
+            100% { opacity: 1; transform: scale(1.2); }
         }
         
-        /* Croissant de lune plus sobre */
+        /* Croissant de lune */
         .moon {
             position: fixed;
             top: 5%;
             right: 8%;
-            width: 100px;
-            height: 100px;
-            background: #f8f9fa;
+            width: 120px;
+            height: 120px;
+            background: #f4d03f;
             border-radius: 50%;
-            box-shadow: 0 0 20px rgba(248, 249, 250, 0.3);
+            box-shadow: 0 0 30px rgba(244, 208, 63, 0.6);
             z-index: 2;
+            animation: moonGlow 3s ease-in-out infinite alternate;
         }
         
         .moon::before {
@@ -60,10 +60,16 @@
             position: absolute;
             top: 15px;
             left: 15px;
-            width: 70px;
-            height: 70px;
-            background: #0a192f;
+            width: 90px;
+            height: 90px;
+            background: #1e3c72;
             border-radius: 50%;
+            box-shadow: 0 0 20px rgba(30, 60, 114, 0.8);
+        }
+        
+        @keyframes moonGlow {
+            0% { box-shadow: 0 0 30px rgba(244, 208, 63, 0.6); }
+            100% { box-shadow: 0 0 50px rgba(244, 208, 63, 0.9); }
         }
         
         /* Container principal */
@@ -75,81 +81,78 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding: 40px 20px;
+            padding: 20px;
             text-align: center;
-            max-width: 800px;
-            margin: 0 auto;
         }
         
         /* Titre principal */
         .main-title {
             font-family: 'Playfair Display', serif;
-            font-size: 4rem;
+            font-size: 4.5rem;
             font-weight: 700;
-            color: #e2b979;
+            color: #f4d03f;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
             margin-bottom: 20px;
-            animation: titleAppear 1.5s ease-out;
-            line-height: 1.2;
+            animation: titleAppear 2s ease-out;
         }
         
         @keyframes titleAppear {
             0% { 
                 opacity: 0; 
-                transform: translateY(-30px); 
+                transform: translateY(-50px) scale(0.8); 
             }
             100% { 
                 opacity: 1; 
-                transform: translateY(0); 
+                transform: translateY(0) scale(1); 
             }
         }
         
         /* Nom personnalisé */
         .name-title {
             font-family: 'Playfair Display', serif;
-            font-size: 2.2rem;
+            font-size: 2.5rem;
             font-weight: 400;
-            color: #f8f9fa;
-            margin-bottom: 30px;
-            letter-spacing: 1px;
-            position: relative;
-            padding-bottom: 15px;
+            color: #f7dc6f;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            margin-bottom: 25px;
+            animation: nameGlow 3s ease-in-out infinite alternate;
+            letter-spacing: 2px;
         }
         
-        .name-title::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100px;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, #e2b979, transparent);
+        @keyframes nameGlow {
+            0% { 
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+                transform: scale(1);
+            }
+            100% { 
+                text-shadow: 2px 2px 8px rgba(247, 220, 111, 0.8), 0 0 20px rgba(247, 220, 111, 0.3);
+                transform: scale(1.05);
+            }
         }
         
         /* Texte en arabe */
         .arabic-text {
-            font-size: 2.5rem;
-            color: #ffffff;
+            font-size: 3rem;
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
             margin-bottom: 30px;
-            animation: fadeInUp 1.5s ease-out 0.3s both;
+            animation: fadeInUp 2s ease-out 0.5s both;
             direction: rtl;
-            font-weight: 700;
         }
         
         /* Sous-titre */
         .subtitle {
-            font-size: 1.3rem;
-            color: #c9d1d9;
+            font-size: 1.5rem;
+            color: #e8f4f8;
             margin-bottom: 40px;
-            animation: fadeInUp 1.5s ease-out 0.6s both;
-            line-height: 1.6;
-            max-width: 600px;
+            animation: fadeInUp 2s ease-out 1s both;
+            font-style: italic;
         }
         
         @keyframes fadeInUp {
             0% {
                 opacity: 0;
-                transform: translateY(20px);
+                transform: translateY(30px);
             }
             100% {
                 opacity: 1;
@@ -157,49 +160,84 @@
             }
         }
         
-        /* Séparateur élégant */
-        .divider {
-            width: 150px;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, #e2b979, transparent);
-            margin: 30px auto;
-            animation: fadeInUp 1.5s ease-out 0.9s both;
+        /* Ornements décoratifs */
+        .ornament {
+            width: 300px;
+            height: 80px;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 80"><path d="M150 10 Q170 30 190 10 Q210 30 230 10 Q250 30 270 10 L290 40 Q270 50 250 40 Q230 50 210 40 Q190 50 170 40 Q150 50 130 40 Q110 50 90 40 Q70 50 50 40 Q30 50 10 40 L30 10 Q50 30 70 10 Q90 30 110 10 Q130 30 150 10 Z" fill="%23f4d03f" opacity="0.8"/></svg>') center/contain no-repeat;
+            margin: 20px auto;
+            animation: ornamentFloat 4s ease-in-out infinite alternate;
         }
         
-        /* Bouton plus sobre */
+        @keyframes ornamentFloat {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-10px); }
+        }
+        
+        /* Mosquée silhouette */
+        .mosque {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 400px;
+            height: 200px;
+            background: rgba(0, 0, 0, 0.3);
+            clip-path: polygon(40% 100%, 40% 70%, 35% 70%, 35% 50%, 45% 45%, 45% 30%, 50% 25%, 55% 30%, 55% 45%, 65% 50%, 65% 70%, 60% 70%, 60% 100%);
+            animation: mosqueGlow 5s ease-in-out infinite alternate;
+        }
+        
+        @keyframes mosqueGlow {
+            0% { background: rgba(0, 0, 0, 0.3); }
+            100% { background: rgba(244, 208, 63, 0.2); }
+        }
+        
+        /* Particules flottantes */
+        .particle {
+            position: fixed;
+            background: #f4d03f;
+            border-radius: 50%;
+            opacity: 0.7;
+            animation: float 8s infinite linear;
+            z-index: 1;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.7;
+            }
+            90% {
+                opacity: 0.7;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        /* Animation du bouton */
         .blessing-btn {
-            background: transparent;
-            border: 1px solid #e2b979;
-            padding: 12px 30px;
-            font-size: 1.1rem;
+            background: linear-gradient(45deg, #f4d03f, #f7dc6f);
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.2rem;
             font-family: 'Amiri', serif;
-            color: #e2b979;
-            border-radius: 4px;
+            color: #1e3c72;
+            border-radius: 50px;
             cursor: pointer;
             transition: all 0.3s ease;
-            animation: fadeInUp 1.5s ease-out 1.2s both;
+            box-shadow: 0 5px 15px rgba(244, 208, 63, 0.4);
+            animation: fadeInUp 2s ease-out 1.5s both;
             margin-top: 20px;
-            position: relative;
-            overflow: hidden;
         }
         
         .blessing-btn:hover {
-            background: rgba(226, 185, 121, 0.1);
-        }
-        
-        .blessing-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(226, 185, 121, 0.2), transparent);
-            transition: 0.5s;
-        }
-        
-        .blessing-btn:hover::before {
-            left: 100%;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(244, 208, 63, 0.6);
         }
         
         /* Message de bénédiction */
@@ -208,43 +246,31 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            background: #0a192f;
+            background: rgba(255, 255, 255, 0.95);
             padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
             display: none;
             z-index: 100;
             text-align: center;
-            color: #f8f9fa;
-            max-width: 450px;
-            width: 90%;
-            border: 1px solid rgba(226, 185, 121, 0.3);
+            color: #1e3c72;
+            max-width: 400px;
         }
         
         .blessing-message.show {
             display: block;
-            animation: blessingAppear 0.4s ease-out;
+            animation: blessingAppear 0.5s ease-out;
         }
         
         @keyframes blessingAppear {
             0% {
                 opacity: 0;
-                transform: translate(-50%, -50%) scale(0.9);
+                transform: translate(-50%, -50%) scale(0.8);
             }
             100% {
                 opacity: 1;
                 transform: translate(-50%, -50%) scale(1);
             }
-        }
-        
-        .blessing-message h3 {
-            color: #e2b979;
-            margin-bottom: 15px;
-            font-family: 'Playfair Display', serif;
-        }
-        
-        .blessing-message p {
-            line-height: 1.6;
         }
         
         .close-btn {
@@ -255,26 +281,13 @@
             border: none;
             font-size: 1.5rem;
             cursor: pointer;
-            color: #c9d1d9;
-            transition: color 0.3s;
-        }
-        
-        .close-btn:hover {
-            color: #e2b979;
-        }
-        
-        /* Signature */
-        .signature {
-            margin-top: 40px;
-            font-style: italic;
-            color: #8b949e;
-            animation: fadeInUp 1.5s ease-out 1.5s both;
+            color: #1e3c72;
         }
         
         /* Responsive */
         @media (max-width: 768px) {
             .main-title {
-                font-size: 2.8rem;
+                font-size: 3rem;
             }
             
             .name-title {
@@ -286,21 +299,26 @@
             }
             
             .subtitle {
-                font-size: 1.1rem;
+                font-size: 1.2rem;
             }
             
             .moon {
-                width: 70px;
-                height: 70px;
+                width: 80px;
+                height: 80px;
                 top: 3%;
                 right: 5%;
             }
             
             .moon::before {
-                width: 50px;
-                height: 50px;
+                width: 60px;
+                height: 60px;
                 top: 10px;
                 left: 10px;
+            }
+            
+            .ornament {
+                width: 200px;
+                height: 60px;
             }
         }
     </style>
@@ -312,6 +330,12 @@
     <!-- Croissant de lune -->
     <div class="moon"></div>
     
+    <!-- Particules flottantes -->
+    <div id="particles"></div>
+    
+    <!-- Mosquée en silhouette -->
+    <div class="mosque"></div>
+    
     <!-- Container principal -->
     <div class="container">
         <h1 class="main-title">Aïd Mubarak</h1>
@@ -320,21 +344,19 @@
         
         <div class="arabic-text">عيد مبارك</div>
         
-        <div class="divider"></div>
+        <div class="ornament"></div>
         
-        <p class="subtitle">Que cette fête sacrée vous apporte paix, bonheur et prospérité. Puisse cette occasion être l'opportunité de renforcer les liens familiaux et spirituels.</p>
+        <p class="subtitle">Que cette fête soit remplie de joie, de paix et de bénédictions</p>
         
         <button class="blessing-btn" onclick="showBlessing()">
-            Recevoir une bénédiction
+            ✨ Recevoir une bénédiction ✨
         </button>
-        
-        <p class="signature">Meilleurs vœux pour un Aïd béni</p>
     </div>
     
     <!-- Message de bénédiction -->
     <div class="blessing-message" id="blessingMessage">
         <button class="close-btn" onclick="hideBlessing()">×</button>
-        <h3>Bénédiction de l'Aïd</h3>
+        <h3>🌙 Bénédiction de l'Aïd 🌙</h3>
         <p id="blessingText"></p>
     </div>
 
@@ -342,29 +364,49 @@
         // Créer les étoiles
         function createStars() {
             const starsContainer = document.getElementById('stars');
-            const numStars = 30; // Moins d'étoiles pour un look plus sobre
+            const numStars = 50;
             
             for (let i = 0; i < numStars; i++) {
                 const star = document.createElement('div');
                 star.className = 'star';
                 star.style.left = Math.random() * 100 + '%';
                 star.style.top = Math.random() * 100 + '%';
-                star.style.width = Math.random() * 2 + 1 + 'px';
+                star.style.width = Math.random() * 3 + 1 + 'px';
                 star.style.height = star.style.width;
-                star.style.animationDelay = Math.random() * 3 + 's';
+                star.style.animationDelay = Math.random() * 2 + 's';
                 starsContainer.appendChild(star);
             }
         }
         
+        // Créer les particules flottantes
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            
+            setInterval(() => {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.width = Math.random() * 8 + 3 + 'px';
+                particle.style.height = particle.style.width;
+                particle.style.animationDuration = (Math.random() * 5 + 5) + 's';
+                particlesContainer.appendChild(particle);
+                
+                // Supprimer la particule après l'animation
+                setTimeout(() => {
+                    particle.remove();
+                }, 10000);
+            }, 800);
+        }
+        
         // Messages de bénédiction
         const blessings = [
-            "Que le Tout Miséricordieux vous accorde santé, bonheur et prospérité en cette journée bénie.",
+            "Que Allah vous accorde santé, bonheur et prospérité en cette journée bénie.",
             "Puisse cet Aïd apporter la paix dans votre cœur et la joie dans votre foyer.",
-            "Que les bénédictions de cette fête sacrée illuminent votre chemin toute l'année.",
-            "Qu'Allah accepte vos bonnes actions et vous comble de Ses bienfaits.",
+            "Que les bénédictions de cette fête sacrée illuminent votre chemin.",
+            "Qu'Allah accepte vos prières et vous comble de Ses bienfaits.",
             "Que cette fête renforce les liens d'amour et de fraternité autour de vous.",
-            "Puisse cet Aïd marquer le début d'une période de réussite et d'épanouissement.",
-            "Que la lumière de cette fête vous apporte sérénité et accomplissement."
+            "Puisse cet Aïd marquer le début d'une période de bonheur et de réussite.",
+            "Que la lumière de cette fête dissipe toutes vos peines et vous apporte la sérénité."
         ];
         
         // Afficher une bénédiction aléatoire
@@ -376,16 +418,36 @@
             text.textContent = randomBlessing;
             message.classList.add('show');
             
-            // Effet de vibration sur mobile
-            if (navigator.vibrate) {
-                navigator.vibrate(100);
-            }
+            // Créer des étoiles autour du message
+            createBlessingStars();
         }
         
         // Cacher le message de bénédiction
         function hideBlessing() {
             const message = document.getElementById('blessingMessage');
             message.classList.remove('show');
+        }
+        
+        // Créer des étoiles autour du message de bénédiction
+        function createBlessingStars() {
+            for (let i = 0; i < 10; i++) {
+                const star = document.createElement('div');
+                star.innerHTML = '✨';
+                star.style.position = 'fixed';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.fontSize = '20px';
+                star.style.zIndex = '101';
+                star.style.pointerEvents = 'none';
+                star.style.animation = 'fadeInUp 2s ease-out forwards';
+                
+                document.body.appendChild(star);
+                
+                // Supprimer l'étoile après l'animation
+                setTimeout(() => {
+                    star.remove();
+                }, 2000);
+            }
         }
         
         // Fermer le message en cliquant à l'extérieur
@@ -406,15 +468,56 @@
         // Initialiser les animations
         document.addEventListener('DOMContentLoaded', function() {
             createStars();
+            createParticles();
             
-            // Animation subtile du titre
-            const title = document.querySelector('.main-title');
-            title.style.opacity = 0;
-            setTimeout(() => {
-                title.style.transition = 'opacity 1.5s ease-out';
-                title.style.opacity = 1;
-            }, 300);
+            // Ajouter des effets sonores (simulation)
+            document.querySelector('.blessing-btn').addEventListener('click', function() {
+                // Effet de vibration sur mobile
+                if (navigator.vibrate) {
+                    navigator.vibrate(200);
+                }
+            });
         });
+        
+        // Animation de typing pour le titre
+        function typeWriter(element, text, speed = 100) {
+            let i = 0;
+            element.innerHTML = '';
+            
+            function typing() {
+                if (i < text.length) {
+                    element.innerHTML += text.charAt(i);
+                    i++;
+                    setTimeout(typing, speed);
+                }
+            }
+            typing();
+        }
+        
+        // Effet de neige dorée (optionnel)
+        function createGoldenSnow() {
+            setInterval(() => {
+                const snowflake = document.createElement('div');
+                snowflake.innerHTML = '❄️';
+                snowflake.style.position = 'fixed';
+                snowflake.style.left = Math.random() * 100 + '%';
+                snowflake.style.top = '-50px';
+                snowflake.style.fontSize = '20px';
+                snowflake.style.color = '#f4d03f';
+                snowflake.style.zIndex = '1';
+                snowflake.style.pointerEvents = 'none';
+                snowflake.style.animation = 'float 10s linear forwards';
+                
+                document.body.appendChild(snowflake);
+                
+                setTimeout(() => {
+                    snowflake.remove();
+                }, 10000);
+            }, 2000);
+        }
+        
+        // Activer la neige dorée après 3 secondes
+        setTimeout(createGoldenSnow, 3000);
     </script>
 </body>
 </html>
